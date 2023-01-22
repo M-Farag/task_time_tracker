@@ -5,6 +5,7 @@ use notifica;
 fn main() {
     const COMMAND_TRACK:&str = "track";
     const COMMAND_EXIT:&str = "exit";
+    const SIXTY:u64 = 60;
 
     'app_main_loop:loop {
         println!("rdy_>");
@@ -13,9 +14,10 @@ fn main() {
 
         io::stdin().read_line(&mut user_input).expect("Err: Reading your input");
         
-        let (command,sleep_time) = parse_user_input_to_parts(&user_input);
+        let user_input = user_input.trim();
+        let (command,sleep_time) = parse_user_input_to_parts(user_input);
         
-        match command.trim() {
+        match command {
             COMMAND_TRACK => {
                 let sleep_time:u64 = match sleep_time.trim().parse() {
                     Err(_) => continue,
@@ -30,7 +32,7 @@ fn main() {
                 }
                 println!("\n_tracking");
                 
-                thread::sleep(time::Duration::from_secs(sleep_time * 60));
+                thread::sleep(time::Duration::from_secs(sleep_time * SIXTY));
                 let msg = format!("time of {} minute(s) is over",sleep_time);
                 
                 match notifica::notify("Task ended", &msg) {
