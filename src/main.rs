@@ -55,10 +55,8 @@ fn main() {
 
 fn parse_user_input_to_parts(some_string:&str) -> (&str,&str)
 {
-    let parts = some_string.as_bytes();
-
-    for (index, &byte) in parts.iter().enumerate() {
-        if byte == b' ' {
+    for (index, byte) in some_string.chars().enumerate() {
+        if byte == ' ' {
            return (&some_string[..index] , &some_string[index+1..])
         }
     }
