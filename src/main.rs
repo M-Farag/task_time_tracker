@@ -4,7 +4,6 @@ use notifica;
 
 fn main() {
     const COMMAND_TRACK:&str = "track";
-    const COMMAND_EXIT:&str = "exit";
     const SIXTY:u64 = 60;
 
     'app_main_loop:loop {
@@ -17,8 +16,7 @@ fn main() {
         let user_input = user_input.trim();
         let (command,sleep_time) = parse_user_input_to_parts(user_input);
         
-        match command {
-            COMMAND_TRACK => {
+        if let COMMAND_TRACK = command {
                 let sleep_time:u64 = match sleep_time.trim().parse() {
                     Err(_) => continue,
                     Ok(num) => num
@@ -40,14 +38,12 @@ fn main() {
                     Ok(msg) => msg
                 }
                 println!("_tracked \n");
-            },
+            } 
+            else 
+            {
+                break 'app_main_loop;
             
-            COMMAND_EXIT => {
-              break 'app_main_loop;
-            },
-
-            _ => continue,
-        };
+            };
     }
     
 
