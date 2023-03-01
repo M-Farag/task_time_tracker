@@ -3,6 +3,7 @@ use std::{thread,time};
 
 
 pub mod Notification;
+pub mod CommandBuilder;
 
 fn main() {
     const COMMAND_TRACK:&str = "track";
