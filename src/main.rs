@@ -1,6 +1,8 @@
 use std::io;
 use std::{thread,time};
-use notifica;
+
+
+pub mod Notification;
 
 fn main() {
     const COMMAND_TRACK:&str = "track";
@@ -24,19 +26,15 @@ fn main() {
                 
                 let msg = format!("Start counting down: {} minute(s)",sleep_time);
                 
-                match notifica::notify("Task started", &msg) {
-                    Err(_) => continue,
-                    Ok(msg) => msg
-                }
+                Notification::notify(&msg);
+
                 println!("\n_tracking");
                 
                 thread::sleep(time::Duration::from_secs(sleep_time * SIXTY));
                 let msg = format!("time of {} minute(s) is over",sleep_time);
                 
-                match notifica::notify("Task ended", &msg) {
-                    Err(_) => continue,
-                    Ok(msg) => msg
-                }
+                Notification::notify(&msg);
+                
                 println!("_tracked \n");
             } 
             else 
