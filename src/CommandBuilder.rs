@@ -1,3 +1,4 @@
+#[derive(Debug)]
 pub struct Command {
     pub parts:Vec<String>
 }
@@ -9,7 +10,7 @@ impl Command {
         Self { parts: Vec::new() }
     }
 
-    pub fn parse_user_input(&mut self,user_input:String) -> ()
+    pub fn parse_user_input(&mut self,user_input:&String) -> ()
     {
         let mut start_index = 0;
         for (end_index, letter) in user_input.chars().enumerate() {
