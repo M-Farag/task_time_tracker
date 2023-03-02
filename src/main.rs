@@ -1,11 +1,11 @@
 use std::io;
 use std::{thread,time};
-use CommandBuilder::Command;
-use Timer::Timer as ClockTime;
+use crate::command_builder::Command;
+use crate::timer::Timer as ClockTime;
 
-pub mod Notification;
-pub mod CommandBuilder;
-pub mod Timer;
+pub mod notification;
+pub mod command_builder;
+pub mod timer;
 
 fn main() {
     const COMMAND_TRACK:&str = "track";
@@ -13,7 +13,6 @@ fn main() {
    
     let mut timer:ClockTime = ClockTime::new();
     
-    println!("{:#?}",timer);
     'app_main_loop:loop {
         println!("rdy_>");
         
@@ -55,16 +54,16 @@ fn main() {
         
         if let COMMAND_TRACK = command_0.trim() {
                 timer.render_clock();
-                let msg = format!("Start counting down: {} second(s)",timer.duration);
+                let msg = format!("Start tracking down: {} second(s)",timer.duration);
                 
-                Notification::notify(&msg);
+                notification::notify(&msg);
 
                 println!("\n_tracking");
                 
                 thread::sleep(time::Duration::from_secs(timer.duration ));
                 let msg = format!("time of {} second(s) is over",timer.duration);
                 
-                Notification::notify(&msg);
+                notification::notify(&msg);
                 
                 println!("_tracked \n");
             } 
@@ -76,15 +75,4 @@ fn main() {
     }
     
 
-}
-
-fn parse_user_input_to_parts(some_string:&str) -> (&str,&str)
-{
-    for (index, byte) in some_string.chars().enumerate() {
-        if byte == ' ' {
-           return (&some_string[..index] , &some_string[index+1..])
-        }
-    }
-
-    (&some_string[..],&some_string[..])
 }
