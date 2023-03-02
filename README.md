@@ -6,7 +6,8 @@ I wanted a simple terminal count down timer, No sounds, no noise Just desktop no
 - Run `cargo build --release` & use/open the `binary/executable` file
 - When you see the `rdy_>` sign on your terminal, this means it is working
 - Write the track command to start counting down in minutes
-- `track 10` , This for example will count down for 10 minutes
+- `track 10 minutes` , This for example will count down for 10 minutes
+- `track 10 seconds` , This for example will count down for 10 seconds
 - Once it is done, You will receive a notification on your desktop
 - If you wanna close it just write `exit`
 
